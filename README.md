@@ -6,6 +6,7 @@
 
 | 路徑 | 說明 |
 |------|------|
+| `RULES.md` | **開發鐵則**：Poke MCP/整合一律嚴格參考官方 doc（必讀） |
 | `build_all.py` | 跑每個 recipe 的產生器 → 彙整到 `dist/<recipe>/` + 首頁列表 |
 | `.github/workflows/build-ics.yml` | 每 6h 重建 + 部署 Pages |
 | `world-cup-2026/` | 2026 世界盃賽程訂閱（見子資料夾 README） |
