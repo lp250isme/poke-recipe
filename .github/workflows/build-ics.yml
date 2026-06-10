@@ -1,0 +1,43 @@
+name: build-and-deploy-recipes
+
+# 自動重建所有 recipe → 彙整 dist/ → 部署 GitHub Pages
+# 訂閱者日曆自動同步（淘汰賽隊伍底定、開賽時間變更都會反映）
+on:
+  schedule:
+    - cron: "0 */6 * * *"   # 每 6 小時（UTC）
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: pages
+  cancel-in-progress: false
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Build all recipes
+        run: python3 build_all.py   # 任一 recipe 隊名漏譯會 exit 1 → build 失敗，不上線錯誤資料
+      - uses: actions/upload-pages-artifact@v3
+        with:
+          path: dist
+
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - id: deployment
+        uses: actions/deploy-pages@v4
