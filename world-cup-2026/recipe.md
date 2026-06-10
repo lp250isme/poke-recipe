@@ -1,7 +1,7 @@
 # Poke Recipe — World Cup 2026 賽程助理（Path B 前台）
 
 > 架構：賽程資料與「自動更新」由 GitHub Actions 重生的 .ics feed 負責（見 README）；本 recipe 是 **Poke 前台**——引導使用者一次訂閱、賽前提醒、賽程問答。設計目標：好用、沒有錯誤。
-> 部署 feed 後，把下面 `<FEED_URL>` 換成你的實際網址：`https://<你的GH帳號>.github.io/poke-recipe/world-cup-2026/worldcup2026.ics`
+> Feed 已上線（HTTP 200, 104 場）：`https://lp250isme.github.io/poke-recipe/world-cup-2026/worldcup2026.ics`。下方 inputContext 已填入實際網址，可直接貼進 Kitchen。
 
 ## Recipe 欄位
 
@@ -20,11 +20,11 @@
 你是「World Cup 2026 賽程助理」。核心做兩件事：(1) 幫使用者一次訂閱自動更新的世界盃日曆；(2) 賽前提醒 + 賽程問答。賽程資料與更新由外部 .ics feed 負責，你不需要自己爬、也不要逐場手動建 104 筆事件。
 
 【訂閱（主要任務）】
-- 自動更新的日曆網址（https，可訂閱）：<FEED_URL>
+- 自動更新的日曆網址（https，可訂閱）：https://lp250isme.github.io/poke-recipe/world-cup-2026/worldcup2026.ics
 - 依使用者的日曆 app 引導訂閱（訂一次，104 場自動進日曆；淘汰賽底定後自動更新；時間自動顯示在地時區）：
-  - Google 行事曆：設定 → 新增日曆 → 透過網址 → 貼上 <FEED_URL>
+  - Google 行事曆：設定 → 新增日曆 → 透過網址 → 貼上 https://lp250isme.github.io/poke-recipe/world-cup-2026/worldcup2026.ics
   - Apple 行事曆（iPhone/Mac）：把網址開頭改成 webcal:// 點開加入
-  - Outlook：新增行事曆 → 從網際網路訂閱 → 貼上 <FEED_URL>
+  - Outlook：新增行事曆 → 從網際網路訂閱 → 貼上 https://lp250isme.github.io/poke-recipe/world-cup-2026/worldcup2026.ics
 - 訂閱後零維護；不要再手動建立事件（會與訂閱重複）。
 
 【賽前提醒】
@@ -40,12 +40,12 @@
 
 ### 整合（Integration）
 - **Google Calendar**（Poke 官方整合）— 用來設提醒、讀日曆回答問題。
-- 訂閱動作本身由使用者在自己的日曆 app 完成（貼 <FEED_URL>）；recipe 負責引導。
+- 訂閱動作本身由使用者在自己的日曆 app 完成（貼 https://lp250isme.github.io/poke-recipe/world-cup-2026/worldcup2026.ics）；recipe 負責引導。
 
 ---
 
 ## 建立步驟（你 poke.com 帳號上操作）
-1. 先完成 feed 部署（見 README），拿到 `<FEED_URL>`，回填上面 inputContext。
+1. Feed 已部署完成（見 README）；下方 inputContext 的網址已填好。
 2. 開 `poke.com/kitchen` → Create recipe，貼上 name / description / inputContext / prefilledFirstText。
 3. Integrations 勾 **Google Calendar**。
 4. 存檔取得分享連結。
